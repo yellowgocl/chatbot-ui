@@ -1,26 +1,85 @@
+/* src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: 'Roboto', sans-serif; /* Or Google Sans if available, otherwise a good default */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --color-primary: hsl(220, 70%, 55%);
+    --color-primary-light: hsl(220, 70%, 65%);
+    --color-primary-dark: hsl(220, 70%, 45%);
+    --color-primary-foreground: hsl(0, 0%, 100%);
+    --color-secondary: hsl(210, 40%, 96.1%);
+    --color-secondary-50: hsl(240, 20%, 98%);
+    --color-secondary-foreground: hsl(210, 40%, 9.8%);
+    --color-accent: hsl(260, 70%, 60%);
+    --color-accent-foreground: hsl(0, 0%, 100%);
+    --color-muted: hsl(210, 40%, 90%);
+    --color-muted-foreground: hsl(210, 40%, 45%);
+    --color-background: hsl(0, 0%, 100%);
+    --color-foreground: hsl(210, 40%, 9.8%);
+    --color-border: hsl(210, 40%, 85%);
+    --color-input: hsl(210, 40%, 90%);
+    --color-ring: hsl(220, 70%, 55%);
+    --color-danger: hsl(0, 84.2%, 60.2%);
+    --color-danger-foreground: hsl(0, 0%, 100%);
+
+    --color-primary-checked: #338fd0;
+
+    --color-switch-track: hsl(210, 40%, 80%);
+    --color-switch-track-checked: var(--color-primary-checked);
+    --color-switch-thumb: hsl(0, 0%, 100%);
+
+    --color-select-button-default: var(--color-background);
+    --color-select-button-hover: var(--color-secondary-50);
+    --color-select-button-focus: var(--color-ring);
+    --color-select-option-active: var(--color-primary);
+    --color-select-option-active-foreground: var(--color-primary-foreground);
+    --color-select-option-inactive: var(--color-background);
+    --color-select-option-inactive-foreground: var(--color-foreground);
+
+    --color-range-track: var(--color-muted);         /* e.g., hsl(210, 40%, 90%) */
+    --color-range-progress: var(--color-primary);    /* e.g., hsl(220, 70%, 55%) */
+    --color-range-thumb: var(--color-primary-checked);       /* e.g., hsl(220, 70%, 55%) */
+    --color-range-thumb-hover: var(--color-primary-light); /* Optional hover for thumb */
+    --color-range-thumb-border: var(---color-primary-checked); /* Optional border for thumb */
+    --color-range-thumb-hover: var(---color-primary-dark); /* Optional border for thumb */
+
+    /* CSS variables for the custom component in tailwind.config.js */
+    --range-track-bg: var(--color-range-track);
+    --range-progress-bg: var(--color-range-progress);
+    --range-thumb-bg: var(--color-range-thumb);
+    --range-thumb-bg-hover: var(--color-range-thumb-hover);
+    --range-thumb-border-color: var(--color-range-thumb-border);
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif; /* Or your preferred font */
+  }
 }
 
-/* Custom scrollbar (optional, for a more polished look) */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
-}
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 3px;
+@layer components {
+  /* You can define base component styles here if needed,
+     but we'll mostly do it in React components */
+  .btn {
+    @apply px-4 py-2 rounded-md font-medium transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+  .btn-primary {
+    @apply bg-button-primary text-button-primary-foreground hover:bg-button-primary-hover active:bg-button-primary-active focus:ring-primary;
+  }
+  .btn-secondary {
+    @apply bg-button-secondary text-button-secondary-foreground hover:bg-button-secondary-hover active:bg-button-secondary-active focus:ring-primary border border-border;
+  }
+   .btn-ghost {
+    @apply bg-button-ghost text-button-ghost-foreground hover:bg-button-ghost-hover active:bg-button-ghost-active focus:ring-primary;
+  }
+  .btn-danger {
+    @apply bg-button-danger text-button-danger-foreground hover:bg-button-danger-hover active:bg-button-danger-active focus:ring-danger;
+  }
+  .input-base {
+    @apply block w-full rounded-md border-border shadow-sm focus:border-ring focus:ring focus:ring-ring focus:ring-opacity-50 sm:text-sm bg-white;
+  }
 }

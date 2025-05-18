@@ -2,7 +2,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { HandThumbUpIcon, HandThumbDownIcon } from '@heroicons/react/24/outline'; // Or solid if preferred
-import IconButton from '../common/IconButton';
+import IconButton from '../common/Button';
 
 const Message = ({ author, text }) => {
   const isModel = author === 'model';

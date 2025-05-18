@@ -2,7 +2,6 @@
 import React from 'react';
 import clsx from 'clsx';
 import { XMarkIcon } from '@heroicons/react/20/solid'; // Smaller icon for close
-import IconButton from './IconButton'; // If you want to use IconButton for the close button
 
 const Chip = ({
   children,

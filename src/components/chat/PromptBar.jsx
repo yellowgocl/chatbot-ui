@@ -1,7 +1,6 @@
 // src/components/chat/PromptBar.jsx
 import React, { useState, useEffect, useRef } from 'react'; // Added useRef
 import { PlusIcon, PaperAirplaneIcon } from '@heroicons/react/24/outline';
-import IconButton from '../common/IconButton';
 import Button from '../common/Button';
 
 const PromptBar = () => {
@@ -71,14 +70,13 @@ const PromptBar = () => {
           {/* Right-side controls container */}
           <div className="flex items-center space-x-1 shrink-0">
             {/* Plus Icon Button - Outline style */}
-            <IconButton
+            <Button
               variant="ghost" // Ghost makes it look like an outline button without bg until hover
               size="md" // Uses p-2
               aria-label="Add attachment or context"
               className="text-muted-foreground hover:text-foreground hover:bg-secondary border border-transparent hover:border-border rounded-md" // More outline-like
-            >
-              <PlusIcon className="h-5 w-5" />
-            </IconButton>
+              leftIcon={PlusIcon}
+            />
 
             {/* Run Button - Specific styling from image */}
             <Button
@@ -90,9 +88,10 @@ const PromptBar = () => {
               // with text also slightly darker. If `btn-secondary` isn't enough,
               // you might need a custom class or adjust the theme.
               // For now, relying on btn-secondary from tailwind.config.js
-              className="flex justify-center items-center font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 border-slate-300" // Overriding for closer match
+              className="flex justify-center items-center font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 border-slate-300"
             >
               <span className="hidden sm:inline mr-1.5">{shortcutHint.split(" ")[0]}</span> {/* "Run" */}
+              {/* Removed the PaperAirplaneIcon */} {/* No icon is needed here based on the image */} 
               <span className="hidden sm:inline ml-1.5 text-sm text-muted-foreground">{shortcutHint.split(" ").slice(1).join(" ")}</span> {/* Shortcut part */}
             </Button>
           </div>

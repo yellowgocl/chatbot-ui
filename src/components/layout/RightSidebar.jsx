@@ -2,7 +2,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { XMarkIcon, ArrowPathIcon as RefreshIcon } from '@heroicons/react/24/outline';
-import IconButton from '../common/IconButton';
+import Button from '../common/Button';
 import RunSettings from './RunSettings'; // New import
 import PromptGallery from './PromptGallery'; // To be created
 
@@ -22,13 +22,9 @@ const RightSidebar = ({ isOpen, toggleSidebar, activeView, onResetSettings }) =>
         <h2 className="text-lg font-semibold text-foreground">{viewTitle}</h2>
         <div className="flex items-center space-x-1">
           {activeView === 'runSettings' && ( // Only show reset for Run Settings view
-            <IconButton variant="ghost" size="sm" aria-label="Reset settings" onClick={onResetSettings}>
-              <RefreshIcon className="h-4 w-4" />
-            </IconButton>
+            <Button variant="ghost" size="sm" aria-label="Reset settings" onClick={onResetSettings} leftIcon={RefreshIcon} />
           )}
-          <IconButton variant="ghost" size="sm" onClick={toggleSidebar} aria-label="Close panel">
-            <XMarkIcon className="h-5 w-5" />
-          </IconButton>
+          <Button variant="ghost" size="sm" onClick={toggleSidebar} aria-label="Close panel" leftIcon={XMarkIcon} />
         </div>
       </div>
 

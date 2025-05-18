@@ -3,7 +3,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { NavLink } from 'react-router-dom'; // Import NavLink
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import IconButton from '../common/IconButton';
+import Button from '../common/Button';
 import { sidebarNavItems } from '../../config/menu'; // Import configured items
 
 // NavItem now uses NavLink
@@ -65,33 +65,32 @@ const LeftSidebar = ({ isOpen, toggleSidebar }) => {
       </nav>
       {isOpen && (
         <>
-          <div className="mt-auto text-xs text-muted-foreground/80 p-2 text-center">
-            This experimental model is for feedback and testing only. No production use.
-          </div>
+          
           <div className="absolute bottom-4 -right-3 z-10">
-            <IconButton
+            <Button
               onClick={toggleSidebar}
               variant="secondary"
               size="sm"
               className="rounded-full shadow-md bg-background hover:bg-muted border border-border"
               aria-label="Collapse sidebar"
-            >
-              <ChevronLeftIcon className="h-4 w-4" />
-            </IconButton>
+              leftIcon={ChevronLeftIcon}
+              rounded={true}
+            />
           </div>
         </>
       )}
       {!isOpen && (
          <div className="mt-auto">
-             <IconButton
+             <Button
                 onClick={toggleSidebar}
                 variant="ghost"
                 size="md"
                 className="rounded-md shadow-sm bg-background hover:bg-muted border border-border"
                 aria-label="Expand sidebar"
-            >
-                <ChevronRightIcon className="h-5 w-5" />
-            </IconButton>
+                leftIcon={ChevronRightIcon}
+                // Note: This button is not fully rounded in the original code, 
+                // so we don't explicitly set rounded={true} here.
+            />
          </div>
       )}
     </aside>

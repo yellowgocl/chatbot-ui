@@ -1,7 +1,7 @@
 // src/components/chat/ChatInputArea.jsx
 import React from 'react';
 import { PencilIcon, SparklesIcon, EllipsisVerticalIcon } from '@heroicons/react/24/outline';
-import IconButton from '../common/IconButton';
+import Button from '../common/Button';
 
 const ChatInputArea = () => {
   // The image shows this area as initially empty or containing a system prompt.
@@ -18,15 +18,9 @@ const ChatInputArea = () => {
                    placeholder-muted-foreground"
       />
       <div className="absolute top-2.5 right-2.5 flex items-center space-x-0.5"> {/* Adjusted positioning & spacing */}
-        <IconButton variant="ghost" size="sm" aria-label="Edit" className="text-muted-foreground hover:text-foreground">
-          <PencilIcon className="h-4 w-4" />
-        </IconButton>
-        <IconButton variant="ghost" size="sm" aria-label="Tune" className="text-muted-foreground hover:text-foreground">
-          <SparklesIcon className="h-4 w-4" />
-        </IconButton>
-        <IconButton variant="ghost" size="sm" aria-label="More" className="text-muted-foreground hover:text-foreground">
-          <EllipsisVerticalIcon className="h-4 w-4" />
-        </IconButton>
+        <Button variant="ghost" size="sm" aria-label="Edit" className="text-muted-foreground hover:text-foreground" leftIcon={PencilIcon} />
+        <Button variant="ghost" size="sm" aria-label="Tune" className="text-muted-foreground hover:text-foreground" leftIcon={SparklesIcon} />
+        <Button variant="ghost" size="sm" aria-label="More" className="text-muted-foreground hover:text-foreground" leftIcon={EllipsisVerticalIcon} />
       </div>
     </div>
   );

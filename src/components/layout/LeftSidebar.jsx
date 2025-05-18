@@ -1,5 +1,5 @@
 // src/components/layout/LeftSidebar.jsx
-import React from 'react';
+import React, { useMemo } from 'react';
 import clsx from 'clsx';
 import { NavLink } from 'react-router-dom'; // Import NavLink
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
@@ -31,6 +31,21 @@ const NavItem = ({ icon: Icon, label, path, children, isSidebarOpen }) => (
 );
 
 const LeftSidebar = ({ isOpen, toggleSidebar }) => {
+  const expandButton = useMemo(() => {
+    const styles = clsx(isOpen ? "absolute bottom-2 -right-5 z-10" : "mt-auto")
+    return <div className={styles}>
+        <Button
+          onClick={toggleSidebar}
+          variant="ghost"
+          size="md"
+          className="bg-white hover:bg-muted border border-border"
+          aria-label={ isOpen ? "Collapse sidebar" : "Expand sidebar" }
+          leftIcon={isOpen ? ChevronLeftIcon : ChevronRightIcon }
+          // Note: This button is not fully rounded in the original code, 
+          // so we don't explicitly set rounded={true} here.
+      />
+    </div>
+  }, [toggleSidebar, isOpen])
   return (
     <aside
       className={clsx(
@@ -63,36 +78,7 @@ const LeftSidebar = ({ isOpen, toggleSidebar }) => {
           </NavItem>
         ))}
       </nav>
-      {isOpen && (
-        <>
-          
-          <div className="absolute bottom-4 -right-3 z-10">
-            <Button
-              onClick={toggleSidebar}
-              variant="secondary"
-              size="sm"
-              className="rounded-full shadow-md bg-background hover:bg-muted border border-border"
-              aria-label="Collapse sidebar"
-              leftIcon={ChevronLeftIcon}
-              rounded={true}
-            />
-          </div>
-        </>
-      )}
-      {!isOpen && (
-         <div className="mt-auto">
-             <Button
-                onClick={toggleSidebar}
-                variant="ghost"
-                size="md"
-                className="rounded-md shadow-sm bg-background hover:bg-muted border border-border"
-                aria-label="Expand sidebar"
-                leftIcon={ChevronRightIcon}
-                // Note: This button is not fully rounded in the original code, 
-                // so we don't explicitly set rounded={true} here.
-            />
-         </div>
-      )}
+      {expandButton}
     </aside>
   );
 };

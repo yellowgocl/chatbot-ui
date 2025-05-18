@@ -53,20 +53,20 @@ const PromptGallery = () => {
           filteredPrompts.map(prompt => (
             <div
               key={prompt.id}
-              className="p-3 border border-border rounded-lg hover:bg-muted cursor-pointer transition-colors"
+              className="prompt-label"
               onClick={() => handlePromptSelect(prompt)}
               role="button"
               tabIndex={0}
               onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handlePromptSelect(prompt)}
             >
               <p className="text-sm text-foreground mb-1 line-clamp-2">{prompt.text}</p>
-              <div className="flex flex-wrap gap-1 mt-1.5">
+              {/* <div className="flex flex-wrap gap-1 mt-1.5">
                 {prompt.tags.map(tag => (
                   <Chip key={tag} size="sm" variant="default" color="secondary" className="pointer-events-none">
                     {tag}
                   </Chip>
                 ))}
-              </div>
+              </div> */}
             </div>
           ))
         ) : (

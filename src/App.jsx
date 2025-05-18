@@ -13,7 +13,7 @@ import HistoryPage from './pages/HistoryPage'; // Import HistoryPage
 function App() {
   const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(true);
   const [isRightPanelOpen, setIsRightPanelOpen] = useState(true);
-  const [rightSidebarView, setRightSidebarView] = useState('runSettings');
+  const [rightSidebarView, setRightSidebarView] = useState('promptGallery'); // promptGallery, runSettings
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(min-width: 1024px)');

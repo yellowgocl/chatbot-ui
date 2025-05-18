@@ -1,6 +1,5 @@
-// src/pages/ChatPage.jsx
 import React from 'react';
-import ChatHeader from '../components/chat/ChatHeader';
+import PageHeader from '../components/common/PageHeader';
 // ChatInputArea is part of the Chat System Context, not the bottom prompt bar
 // import ChatInputArea from '../components/chat/ChatInputArea';
 import ModelThoughts from '../components/chat/ModelThoughts';
@@ -16,7 +15,7 @@ const ChatPage = () => {
 
   return (
     <div className="flex-1 flex flex-col p-6 space-y-4 overflow-y-auto">
-      <ChatHeader title="Greeting and Assistance" />
+      <PageHeader title="Greeting and Assistance" />
 
       {/* Example: User Input (from image) - This would be part of a message list */}
       <Message author="user" text="Helo" />

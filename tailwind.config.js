@@ -20,6 +20,7 @@ export default {
         secondary: {
           DEFAULT: 'var(--color-secondary)',
           foreground: 'var(--color-secondary-foreground)',
+          "50": 'var(--color-secondary-50)',
         },
         accent: {
           DEFAULT: 'var(--color-accent)',

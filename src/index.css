@@ -84,4 +84,7 @@
   .input-base {
     @apply block w-full rounded-md border-border shadow-sm focus:border-ring focus:ring focus:ring-ring focus:ring-opacity-50 sm:text-sm bg-white;
   }
+  .prompt-label {
+    @apply p-3 border border-border rounded-lg hover:bg-muted cursor-pointer bg-secondary-50
+  }
 }

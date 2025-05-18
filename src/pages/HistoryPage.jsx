@@ -1,12 +1,10 @@
-// src/pages/HistoryPage.jsx
 import React from 'react';
+import PageHeader from '../components/common/PageHeader';
 
 const HistoryPage = () => {
   return (
     <div className="flex-1 flex flex-col p-6 space-y-4">
-      <div className="pb-4 border-b border-border">
-        <h2 className="text-xl font-semibold text-foreground">Chat History</h2>
-      </div>
+      <PageHeader title="Chat History" />
       <div className="bg-secondary p-6 rounded-lg shadow">
         <p className="text-muted-foreground">
           This is where your past chat sessions would be listed.

@@ -6,6 +6,8 @@ import ModelThoughts from '../components/chat/ModelThoughts';
 import Message from '../components/chat/Message';
 import PromptBar from '../components/chat/PromptBar';
 
+import DropdownMenu from '../components/common/DropdownMenu';
+
 const ChatPage = () => {
   // You might want to manage chat messages state here
   // const [messages, setMessages] = useState([
@@ -15,7 +17,9 @@ const ChatPage = () => {
 
   return (
     <div className="flex-1 flex flex-col p-6 space-y-4 overflow-y-auto">
-      <PageHeader title="Greeting and Assistance" />
+      <PageHeader title="Greeting and Assistance">
+        <DropdownMenu></DropdownMenu>
+      </PageHeader>
 
       {/* Example: User Input (from image) - This would be part of a message list */}
       <Message author="user" text="Helo" />

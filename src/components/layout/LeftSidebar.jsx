@@ -1,75 +1,69 @@
 // src/components/layout/LeftSidebar.jsx
 import React from 'react';
 import clsx from 'clsx';
-import {
-  ChatBubbleOvalLeftEllipsisIcon,
-  PlayCircleIcon, // Or VideoCameraIcon
-  CpuChipIcon,    // Or SparklesIcon for Starter Apps
-  ClockIcon,      // Or ArrowPathIcon for History
-  ChevronUpIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-} from '@heroicons/react/24/outline';
+import { NavLink } from 'react-router-dom'; // Import NavLink
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import IconButton from '../common/IconButton';
+import { sidebarNavItems } from '../../config/menu'; // Import configured items
 
-const NavItem = ({ icon: Icon, label, active, children, isSidebarOpen }) => (
+// NavItem now uses NavLink
+const NavItem = ({ icon: Icon, label, path, children, isSidebarOpen }) => (
   <div>
-    <a
-      href="#"
-      className={clsx(
+    <NavLink
+      to={path}
+      className={({ isActive }) => clsx(
         "flex items-center py-2.5 rounded-lg transition-colors group",
-        isSidebarOpen ? "px-3" : "justify-center mx-auto w-10 h-10", // Adjusted for icon-only state
-        active
-          ? isSidebarOpen ? "bg-primary/10 text-primary" : "bg-primary text-primary-foreground" // Different active for collapsed
+        isSidebarOpen ? "px-3" : "justify-center mx-auto w-10 h-10",
+        isActive
+          ? isSidebarOpen ? "bg-primary/10 text-primary" : "bg-primary text-primary-foreground"
           : isSidebarOpen
             ? "text-muted-foreground hover:bg-secondary hover:text-foreground"
             : "text-muted-foreground hover:bg-secondary hover:text-primary"
       )}
-      title={!isSidebarOpen ? label : undefined} // Show tooltip when collapsed
+      title={!isSidebarOpen ? label : undefined}
     >
       <Icon className={clsx("h-5 w-5", isSidebarOpen && "mr-3")} />
       {isSidebarOpen && <span>{label}</span>}
-      {isSidebarOpen && children && <ChevronUpIcon className="h-4 w-4 ml-auto" />}
-    </a>
-    {isSidebarOpen && children && <div className="pl-6 mt-1 space-y-1">{children}</div>}
+      {/* {isSidebarOpen && children && <ChevronUpIcon className="h-4 w-4 ml-auto" />} */} {/* Submenu indicator if needed */}
+    </NavLink>
+    {/* {isSidebarOpen && children && <div className="pl-6 mt-1 space-y-1">{children}</div>} */} {/* Submenu items */}
   </div>
 );
 
 const LeftSidebar = ({ isOpen, toggleSidebar }) => {
-  const navItems = [
-    { icon: ChatBubbleOvalLeftEllipsisIcon, label: "Chat", active: true },
-    { icon: PlayCircleIcon, label: "Stream" },
-    { icon: PlayCircleIcon, label: "Video Gen" }, // Using PlayCircleIcon as placeholder
-    { icon: CpuChipIcon, label: "Starter Apps" },
-    { icon: ClockIcon, label: "History", hasSubmenu: true },
-  ];
-
   return (
     <aside
       className={clsx(
         "bg-secondary border-r border-border flex flex-col transition-all duration-300 ease-in-out relative shrink-0",
-        // Adjusted width for collapsed state to show icons with margin
         isOpen ? "w-sidebar p-4" : "w-[72px] p-4 py-4 flex flex-col items-center"
       )}
     >
       <nav className={clsx("flex-1 space-y-1", !isOpen && "flex flex-col items-center")}>
-        {navItems.map((item) => (
+        {sidebarNavItems.map((item) => (
           <NavItem
-            key={item.label}
+            key={item.id}
             icon={item.icon}
             label={item.label}
-            active={item.active}
+            path={item.path}
             isSidebarOpen={isOpen}
           >
-            {isOpen && item.hasSubmenu && ( // Only show sub-items if sidebar is open
-              <a href="#" className="block text-xs text-muted-foreground hover:text-foreground py-1">
-                React Bootstrap Product Li...
-              </a>
-            )}
+            {/* Render sub-items if 'item.subItems' exists and isOpen */}
+            {isOpen && item.subItems && item.subItems.map(subItem => (
+              <NavLink
+                key={subItem.id}
+                to={subItem.path}
+                className={({ isActive }) => clsx(
+                  "block text-xs py-1 pl-9 pr-3 rounded", // Adjust styling for sub-items
+                  isActive ? "text-primary font-medium" : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                {subItem.label}
+              </NavLink>
+            ))}
           </NavItem>
         ))}
       </nav>
-      {isOpen && ( // Only show text and full button if open
+      {isOpen && (
         <>
           <div className="mt-auto text-xs text-muted-foreground/80 p-2 text-center">
             This experimental model is for feedback and testing only. No production use.
@@ -87,13 +81,12 @@ const LeftSidebar = ({ isOpen, toggleSidebar }) => {
           </div>
         </>
       )}
-      {/* Button to expand when collapsed - positioned differently */}
       {!isOpen && (
          <div className="mt-auto">
              <IconButton
                 onClick={toggleSidebar}
-                variant="ghost" // Or secondary if preferred
-                size="md" // Make it a bit more prominent
+                variant="ghost"
+                size="md"
                 className="rounded-md shadow-sm bg-background hover:bg-muted border border-border"
                 aria-label="Expand sidebar"
             >

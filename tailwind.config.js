@@ -38,6 +38,13 @@ export default {
           DEFAULT: 'hsl(0, 84.2%, 60.2%)',
           foreground: 'hsl(0, 0%, 100%)',
         },
+
+        iconButton: {
+          ghostActive: {
+            bg: 'var(--color-icon-button-ghost-active-bg)',
+            foreground: 'var(--color-icon-button-ghost-active-foreground)',
+          }
+        },
         // Specific component states
         button: {
           primary: {

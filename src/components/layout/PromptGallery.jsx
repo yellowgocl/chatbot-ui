@@ -1,7 +1,7 @@
-// src/components/sidebar/PromptGallery.jsx
 import React, { useState } from 'react';
 import Chip from '../common/Chip';
 import ChipGroup from '../common/ChipGroup';
+import PromptGroup from '../chat/PromptGroup'; // Import PromptGroup
 
 const samplePrompts = [
   { id: 'p1', category: 'Creative Writing', text: 'Write a short story about a lost robot.', tags: ['story', 'sci-fi'] },
@@ -15,13 +15,17 @@ const categories = ['All', 'Creative Writing', 'Coding', 'Brainstorming', 'Summa
 
 const PromptGallery = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
+  // Keep selectedPrompt state, PromptGroup in single mode will manage internal selection
+  // and report the single selected item via onSelectPrompt
   const [selectedPrompt, setSelectedPrompt] = useState(null);
 
   const filteredPrompts = selectedCategory === 'All'
     ? samplePrompts
     : samplePrompts.filter(p => p.category === selectedCategory);
 
-  const handlePromptSelect = (prompt) => {
+  const handlePromptSelect = (selectedItems) => {
+    // PromptGroup in single mode passes an array with 0 or 1 item
+    const prompt = selectedItems.length > 0 ? selectedItems[0] : null;
     console.log("Prompt selected:", prompt);
     setSelectedPrompt(prompt);
     // Here you would typically do something with the selected prompt,
@@ -50,25 +54,12 @@ const PromptGallery = () => {
           {selectedCategory === 'All' ? 'All Prompts' : `${selectedCategory} Prompts`}
         </h3>
         {filteredPrompts.length > 0 ? (
-          filteredPrompts.map(prompt => (
-            <div
-              key={prompt.id}
-              className="prompt-label"
-              onClick={() => handlePromptSelect(prompt)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handlePromptSelect(prompt)}
-            >
-              <p className="text-sm text-foreground mb-1 line-clamp-2">{prompt.text}</p>
-              {/* <div className="flex flex-wrap gap-1 mt-1.5">
-                {prompt.tags.map(tag => (
-                  <Chip key={tag} size="sm" variant="default" color="secondary" className="pointer-events-none">
-                    {tag}
-                  </Chip>
-                ))}
-              </div> */}
-            </div>
-          ))
+          // Use PromptGroup to render prompts
+          <PromptGroup
+            prompts={filteredPrompts}
+            selectionMode="multiple" // Use single selection mode for PromptGallery
+            onSelectPrompt={handlePromptSelect}
+          />
         ) : (
           <p className="text-sm text-muted-foreground">No prompts found in this category.</p>
         )}

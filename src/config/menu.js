@@ -13,10 +13,7 @@ export const sidebarNavItems = [
     label: 'History',
     icon: ClockIcon,
     path: '/history',
-    // Example if History had a submenu again:
-    // hasSubmenu: true,
-    // subItems: [
-    //   { id: 'history-sub', label: 'React Bootstrap Product Li...', path: '/history/some-sub-path' }
-    // ]
+    hasSubmenu: true,
+    subItems: [], // This will be populated with actual history items in the component
   },
 ];

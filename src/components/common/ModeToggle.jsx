@@ -17,23 +17,23 @@ const ModeToggle = () => {
   const inactiveTextColor = 'text-gray-400';
 
   return (
-    <div className="flex items-center justify-center bg-white">
+    <div className="flex items-center justify-center">
       <div className="flex items-center space-x-4">
 
         {/* Developer Label */}
-        <span className={`font-bold text-sm transition-colors duration-300 ${isDeveloper ? activeTextColor : inactiveTextColor}`}>
+        <span className={`font-bold text-xs transition-colors duration-300 ${isDeveloper ? activeTextColor : inactiveTextColor}`}>
           Standard
         </span>
 
         {/* The Main Toggle Switch Container */}
         <div
           onClick={handleToggle}
-          className={`relative flex items-center w-16 h-8 px-[2px] rounded-full cursor-pointer transition-colors duration-300 ease-in-out
+          className={`shadow-inner relative flex items-center w-16 h-8 px-[4px] rounded-full cursor-pointer transition-colors duration-300 ease-in-out
             ${isDeveloper ? developerColor : designerColor}`}
         >
           {/* The Sliding Thumb */}
           <div
-            className={`absolute bg-white p-1 w-7 h-7 rounded-full shadow-md flex items-center justify-center
+            className={`absolute bg-white p-1 w-6 h-6 rounded-full shadow-md flex items-center justify-center
               transform transition-transform duration-300 ease-in-out
               ${isDeveloper ? 'translate-x-0' : 'translate-x-8'}`}
           >
@@ -56,7 +56,7 @@ const ModeToggle = () => {
         </div>
 
         {/* Designer Label */}
-        <span className={`font-bold text-sm transition-colors duration-300 ${!isDeveloper ? activeTextColor : inactiveTextColor}`}>
+        <span className={`font-bold text-xs transition-colors duration-300 ${!isDeveloper ? activeTextColor : inactiveTextColor}`}>
           Internal
         </span>
       </div>

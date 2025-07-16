@@ -16,7 +16,7 @@ const ChatPage = () => {
   // ]);
 
   return (
-    <div className="flex-1 flex flex-col p-6 space-y-4 overflow-y-auto">
+    <div className="flex-1 flex flex-col pb-6 px-6 space-y-4 overflow-y-auto relative">
       <PageHeader>
         <ModeToggle />
       </PageHeader>
@@ -29,6 +29,11 @@ const ChatPage = () => {
         </div>
       </div> */}
 
+      <ModelThoughts />
+      <ModelThoughts />
+      <ModelThoughts />
+      <ModelThoughts />
+      <ModelThoughts />
       <ModelThoughts />
 
       {/* Example: Model Response - This would be part of a message list */}
